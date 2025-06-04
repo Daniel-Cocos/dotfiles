@@ -1,0 +1,32 @@
+source <(fzf --zsh)
+
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/theme.omp.json)"
+eval "$(zoxide init zsh)"
+
+# Aliases
+alias "ls"="eza -a --icons=always"
+alias "ll"="eza -al --icons=always"
+alias "lt"="eza -a --tree --level=1 --icons=always"
+alias "cd" = "z"
+
+# Zplug
+if [[ ! -f ~/.zplug/init.zsh ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+fi
+
+source ~/.zplug/init.zsh
+
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+
+if ! zplug check --verbose; then
+    zplug install
+fi
+
+zplug load
