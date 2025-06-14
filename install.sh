@@ -105,7 +105,7 @@ rm -rf ~/.themes
 
 cp -r ./home/config ~/.config
 cp -r ./home/fonts ~/.fonts
-cp -r ./home/Downloads ~/Downloads
+cp -r ./home/themes ~/.themes
 
 cp -r home/wallpapers ~/.wallpapers
 cp ./home/stylelintrc.js ~/.stylelintrc.js
