@@ -91,6 +91,24 @@ window#waybar.empty #window {
     margin-right: 0;
 }
 
+#custom-exit {
+  background-color: transparent;
+    font-size: 16;
+    color: #FFFFFF;
+    margin: 0px 20px 0px 0px;
+    padding:0px;
+    opacity:0.8;
+}
+
+#clock {
+    background-color: transparent;
+    font-size: 16;
+    color: #FFFFFF;
+    border-radius: 12px;
+    padding: 2px 10px 0px 10px;
+    margin: 10px 15px 10px 0px;
+    opacity:0.8;
+}
 /* -----------------------------------------------------
  * Pulseaudio
  * ----------------------------------------------------- */

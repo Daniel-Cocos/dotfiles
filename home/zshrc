@@ -1,3 +1,7 @@
+if ! pgrep -x hyprland > /dev/null; then
+  hyprland
+fi
+
 source <(fzf --zsh)
 
 # History
@@ -8,12 +12,6 @@ setopt appendhistory
 
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/theme.omp.json)"
 eval "$(zoxide init zsh)"
-
-# Aliases
-alias "ls"="eza -a --icons=always"
-alias "ll"="eza -al --icons=always"
-alias "lt"="eza -a --tree --level=1 --icons=always"
-alias "cd" = "z"
 
 # Zplug
 if [[ ! -f ~/.zplug/init.zsh ]]; then
@@ -30,3 +28,11 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
+
+# Aliases
+alias "ls"="eza -a --icons=always"
+alias "ll"="eza -al --icons=always"
+alias "l"="eza -al --icons=always"
+alias "lt"="eza -a --tree --level=1 --icons=always"
+alias "cd"="z"
+

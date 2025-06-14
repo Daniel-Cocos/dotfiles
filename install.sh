@@ -54,6 +54,7 @@ prog_langs=(
 gui_apps=(    
     "brave-bin"                   # Browser
     "pavucontrol"                 # Audio control
+    "pamixer"                     # Audio control interactions
     "gimp"                        # Image manipulation program
     "obs-studio"                  # Screen recording
     "rofi-wayland"                # Application launcher
@@ -104,7 +105,7 @@ rm -rf ~/.themes
 
 cp -r ./home/config ~/.config
 cp -r ./home/fonts ~/.fonts
-cp -r ./home/themes ~/.themes
+cp -r ./home/Downloads ~/Downloads
 
 cp -r home/wallpapers ~/.wallpapers
 cp ./home/stylelintrc.js ~/.stylelintrc.js

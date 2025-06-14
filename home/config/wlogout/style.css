@@ -10,10 +10,9 @@
 }
 
 window {
-	background: url("../../.backgrounds/blurred_wallpaper.png");
+	background: url("../../.wallpapers/blurred_wallpaper.png") no-repeat center center;;
 	background-size: cover;
 	font-size: 16pt;
-	color: #cdd6f4;
 }
 
 button {
