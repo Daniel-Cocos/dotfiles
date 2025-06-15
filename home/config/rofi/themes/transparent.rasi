@@ -1,0 +1,52 @@
+* {
+    background-color: transparent;
+    border: 0;
+    spacing: 5px;
+    padding: 0;
+    font: "Fira Sans Semibold 12";
+}
+
+window {
+    transparency: "real";
+    background-image: url("~/.wallpapers/wallpaper.png", both);
+    background-image-opacity: 1.0;
+    width: 47.75%;
+    height: 50%;
+}
+
+mainbox {
+    orientation: vertical;
+    children: [ inputbar, listview ];
+    spacing: 8px;
+}
+
+inputbar {
+    children: [ entry ];
+}
+
+entry {
+    text-color: #ffffffcc;
+    padding: 4px 8px;
+}
+
+listview {
+    lines: 10;
+    dynamic: true;
+    fixed-height: false;
+}
+
+element {
+    orientation: horizontal;
+    children: [ element-icon, element-text ];
+    spacing: 10px;
+    padding: 6px 8px;
+}
+
+element-icon {
+    size: 1.4em;
+}
+
+element-text {
+    text-color: #ffffffcc;
+    vertical-align: 0.5;
+}

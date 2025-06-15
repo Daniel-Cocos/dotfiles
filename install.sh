@@ -6,7 +6,6 @@ if ! command -v yay &> /dev/null; then
 fi
 
 terminal=(
-    "fastfetch"                   # Fork of Neofetch
     "kitty"                       # Terminal emulator
     "oh-my-posh"                  # Terminal prompt
     "tmux"                        # Terminal multiplexer

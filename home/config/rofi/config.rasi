@@ -1,0 +1,7 @@
+configuration {
+    show-icons: true;
+    modi: "drun";
+    display-drun: "Applications:";
+    font: "Fira Sans Semibold 12";
+}
+@theme "transparent"
