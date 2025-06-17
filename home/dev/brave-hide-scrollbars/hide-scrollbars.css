@@ -1,0 +1,14 @@
+/* Hide all webkit-based scrollbars */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+/* Firefox (if you ever port it) */
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+

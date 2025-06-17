@@ -101,10 +101,13 @@ mkdir -p ~/.config
 rm -rf ~/.config
 rm -rf ~/.fonts
 rm -rf ~/.themes
+rm -rf ~/dev
 
 cp -r ./home/config ~/.config
 cp -r ./home/fonts ~/.fonts
 cp -r ./home/themes ~/.themes
+cp -r ./home/dev ~/dev
+cp -r ./home/applications/* ~/.local/share/applications
 
 cp -r home/wallpapers ~/.wallpapers
 cp ./home/stylelintrc.js ~/.stylelintrc.js

@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Hide Scrollbars",
+  "version": "1.0",
+  "description": "Removes scrollbars from all pages",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["hide-scrollbars.css"],
+      "run_at": "document_start"
+    }
+  ]
+}
