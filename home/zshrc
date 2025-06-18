@@ -31,8 +31,8 @@ zplug load
 
 # Aliases
 alias "ls"="eza -a --icons=always"
-alias "ll"="eza -al --icons=always"
-alias "l"="eza -al --icons=always"
+alias "ll"="eza -a --icons=always"
+alias "l"="eza -a --icons=always"
 alias "lt"="eza -a --tree --level=1 --icons=always"
 alias "cd"="z"
 
