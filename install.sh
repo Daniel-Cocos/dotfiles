@@ -103,13 +103,14 @@ rm -rf ~/.fonts
 rm -rf ~/.themes
 rm -rf ~/dev
 
-cp -r ./home/config ~/.config
-cp -r ./home/fonts ~/.fonts
-cp -r ./home/themes ~/.themes
 cp -r ./home/dev ~/dev
+cp -r ./home/fonts ~/.fonts
+cp -r ./home/config ~/.config
+cp -r ./home/themes ~/.themes
+cp -r ./home/scripts ~/.scripts
+cp -r ./home/wallpapers ~/.wallpapers
 cp -r ./home/applications/* ~/.local/share/applications
 
-cp -r home/wallpapers ~/.wallpapers
 cp ./home/stylelintrc.js ~/.stylelintrc.js
 cp ./home/tmux.conf ~/.tmux.conf
 cp ./home/zshrc ~/.zshrc
