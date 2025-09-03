@@ -23,10 +23,12 @@ cli_tools=(
     "yazi"                        # File manager
     "tokei"                       # Count lines of a project
     "wget"                        # Retrieve files from a network
+    "unzip"                       # Unzipping tool
     "curl"                        # Transfer data with urls
 )
 
 prog_langs=(
+    "clang"                       # [C/C++] Clang
     "gcc"                         # [C/C++] C compiler
     "go"                          # [Go] golang
     "deno"                        # [JavaScript] JavaScript runtime
