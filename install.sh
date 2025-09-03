@@ -95,6 +95,13 @@ if [ "$(which $SHELL)" != "/usr/bin/zsh" ]; then
     chsh -s $(which zsh)
 fi
 
+# install nvim config
+mkdir nvim-temp
+git clone https://github.com/Daniel-Cocos/nvim-config.git nvim-temp
+cp -r ./nvim-temp/nvim ~/.config
+rm -rf nvim-temp
+
+
 # move dotfiles
 mkdir -p ~/.config
 
@@ -115,5 +122,4 @@ cp ./home/stylelintrc.js ~/.stylelintrc.js
 cp ./home/tmux.conf ~/.tmux.conf
 cp ./home/zshrc ~/.zshrc
 
-# install nvim config
-git clone https://github.com/Daniel-Cocos/nvim-config.git ~/.config/nvim
+
