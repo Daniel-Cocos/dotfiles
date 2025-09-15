@@ -13,6 +13,7 @@ terminal=(
 )
 
 cli_tools=(
+    "brightnessctl"               # Brightness Control
     "neovim"                      # Text editor
     "fzf"                         # Fuzzy Finder
     "zip"                         # Compression utility
