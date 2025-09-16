@@ -59,6 +59,7 @@ gui_apps=(
     "pamixer"                     # Audio control interactions
     "gimp"                        # Image manipulation program
     "obs-studio"                  # Screen recording
+    "nautilus"                    # File Explorer
     "rofi-wayland"                # Application launcher
     "wlogout"                     # Logout Screen
 )
