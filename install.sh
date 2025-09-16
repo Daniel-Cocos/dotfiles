@@ -118,6 +118,7 @@ rm -rf ~/dev
 
 cp -r ./home/dev ~/dev
 cp -r ./home/fonts ~/.fonts
+cp -r /usr/share/fonts-system/
 cp -r ./home/config ~/.config
 cp -r ./home/themes ~/.themes
 cp -r ./home/scripts ~/.scripts
