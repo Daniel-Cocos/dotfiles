@@ -58,6 +58,8 @@ gui_apps=(
     "pavucontrol"                 # Audio control
     "pamixer"                     # Audio control interactions
     "gimp"                        # Image manipulation program
+    "vlc"                         # Media Player
+    "libreoffice"                 # File processing software
     "obs-studio"                  # Screen recording
     "nautilus"                    # File Explorer
     "rofi-wayland"                # Application launcher
