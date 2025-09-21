@@ -1,7 +1,14 @@
 configuration {
+    modi: "drun,run";
     show-icons: true;
-    modi: "drun";
-    display-drun: "Applications:";
-    font: "Fira Sans Semibold 12";
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
 }
-@theme "transparent"
+  @theme "translucent"
+
