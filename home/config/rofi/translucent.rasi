@@ -30,13 +30,14 @@ window {
     location: center;
     anchor: center;
     transparency: "real";
-    padding: 10px;
     border: 0px;
     border-radius: 0px;
-    background-color: rgba(15,15,15,0.5);
+    background-color: rgba(5,5,5,0.75);
     spacing: 0;
     children: [mainbox];
     orientation: horizontal;
+    width: 800px;
+    height: 400px;
 }
 
 mainbox {
@@ -52,10 +53,12 @@ message {
 
 inputbar {
     color: white;
+    padding: 5px;
     text-style: bold;
-    font: "Fira Code 18";
+    font: "Fira Code 20";
     children: [entry];
     text-align: center;
+    background-color: rgba(5,5,5,0.2);
 }
 
 entry,prompt,case-indicator {
