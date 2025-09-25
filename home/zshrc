@@ -37,3 +37,12 @@ alias "l"="eza -a --icons=always"
 alias "lt"="eza -a --tree --level=1 --icons=always"
 alias "cd"="z"
 
+gp() {
+  local message="${1:-Quick Commit}"
+  local branch="${2:-main}"
+
+  git add .
+  git commit -m "$message"
+  git push origin "$branch"
+}
+
