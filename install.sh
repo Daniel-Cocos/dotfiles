@@ -66,6 +66,19 @@ gui_apps=(
     "wlogout"                     # Logout Screen
 )
 
+fonts=(
+    "noto-fonts"
+    "noto-fonts-cjk"
+    "noto-fonts-emoji"
+    "noto-fonts-extra"
+    "otf-font-awesome"
+    "ttf-dejavu"
+    "ttf-firacode-nerd"
+    "ttf-fira-sans"
+    "ttf-nerd-fonts-symbols"
+    "ttf-nerd-fonts-symbols-common"
+)
+
 other=(
     "hyprland"                    # Tiling window manager
     "hyprshot"                    # Screenshot util for hyprland
@@ -75,13 +88,13 @@ other=(
     "wl-clipboard"                # Clipboard for wayland
     "xdg-desktop-portal-hyprland" # Screen-sharing for hyprland
     "xdg-desktop-portal"          # Screen-sharing for hyprland
-    "ttf-fira-sans"               # Lock-Screen Font & other places
     "bibata-cursor-git"           # Cursor Theme
 )
 
 packages=(
     "${terminal[@]}"
     "${cli_tools[@]}"
+    "${fonts[@]}"
     "${prog_langs[@]}"
     "${gui_apps[@]}"
     "${other[@]}"
@@ -90,6 +103,8 @@ packages=(
 for pkg in "${packages[@]}"; do
   yay -S --noconfirm --needed "$pkg"
 done
+
+sudo fc-cache -f -v
 
 # Installs zplug
 if command -v zplug &> /dev/null; then
@@ -118,15 +133,12 @@ rm -rf ~/dev
 
 cp -r ./home/dev ~/dev
 cp -r ./home/fonts ~/.fonts
-cp -r /usr/share/fonts-system/
 cp -r ./home/config ~/.config
 cp -r ./home/themes ~/.themes
 cp -r ./home/scripts ~/.scripts
 cp -r ./home/wallpapers ~/.wallpapers
 cp -r ./home/applications/* ~/.local/share/applications
 
-cp ./home/stylelintrc.js ~/.stylelintrc.js
 cp ./home/tmux.conf ~/.tmux.conf
 cp ./home/zshrc ~/.zshrc
-
 

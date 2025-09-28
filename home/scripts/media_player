@@ -1,0 +1,174 @@
+#!/usr/bin/env sh
+
+MODE="$1"
+STATE_FILE="/tmp/waybar_current_player"
+
+players="$(playerctl -l 2>/dev/null | sed '/^$/d')"
+if [ -z "$players" ]; then
+  printf '{"text":"","class":"hidden"}'
+  exit 0
+fi
+
+preferred="ytmdesktop chromium brave brave-browser brave-browser.desktop chrome"
+ordered=""
+for p in $preferred; do
+  match="$(echo "$players" | grep -m1 "^$p")"
+  [ -n "$match" ] && ordered="$ordered $match"
+done
+for p in $players; do
+  echo "$ordered" | grep -qw "$p" || ordered="$ordered $p"
+done
+
+players="$(echo $ordered)"
+set -- $players
+if [ $# -eq 0 ]; then
+  set -- $players
+fi
+num_players=$#
+
+if [ -f "$STATE_FILE" ]; then
+  idx="$(cat "$STATE_FILE" 2>/dev/null || echo 1)"
+else
+  idx=1
+fi
+
+case "$idx" in
+  ''|*[!0-9]*)
+    idx=1
+    ;;
+esac
+if [ "$idx" -gt "$num_players" ] || [ "$idx" -lt 1 ]; then
+  idx=1
+fi
+
+i=1
+PLAYER=""
+for p in "$@"; do
+  if [ "$i" -eq "$idx" ]; then
+    PLAYER="$p"
+    break
+  fi
+  i=$((i+1))
+done
+
+get_meta() {
+  key="$1"
+  playerctl --player="$PLAYER" metadata "$key" 2>/dev/null || echo ""
+}
+
+status="$(playerctl --player="$PLAYER" status 2>/dev/null || echo "")"
+
+pretty_name() {
+  case "$1" in
+    ytmdesktop*|YouTube-Music*)
+      echo "Music"
+      ;;
+    chromium.instance*|chromium)
+      echo "Music"
+      ;;
+    brave*|brave-browser*|brave-browser.desktop)
+      echo "Brave"
+      ;;
+    chrome*|google-chrome*)
+      echo "Chrome"
+      ;;
+    *)
+      echo "$1"
+      ;;
+  esac
+}
+
+player_icon() {
+  case "$1" in
+    Music)
+      echo ""
+      ;;
+    Brave)
+      echo "<span font='Font Awesome 7 Brands' rise='-1500'></span>"
+      ;;
+    Chromium|Chrome)
+      echo "<span font='Font Awesome 6 Free'></span>"
+      ;;
+    *)
+      echo ""
+      ;;
+  esac
+}
+
+case "$MODE" in
+  cur)
+    title="$(get_meta xesam:title)"
+    artist="$(get_meta xesam:artist)"
+    artist="$(printf '%s' "$artist" | sed -E 's/^\((.*)\)$/\1/; s/^ +//; s/ +$//')"
+
+    play_icon=""
+    echo "$status" | grep -q "Playing" && play_icon=""
+
+    title="${title:-Unknown}"
+    if [ -n "$artist" ]; then
+      tooltip="$(printf '%s - %s' "$title" "$artist")"
+    else
+      tooltip="$title"
+    fi
+
+    tooltip="$(printf '%s' "$tooltip" | sed 's/"/\\"/g')"
+
+    short_player="$(pretty_name "$PLAYER")"
+    tooltip="[$short_player] $tooltip"
+
+    picon="$(player_icon "$short_player")"
+
+    # show player icon followed by play/pause icon
+    printf '{"text":"%s", "tooltip":"%s"}' "$play_icon" "$tooltip"
+    ;;
+  prev)
+    prev="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
+    curmeta="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
+    if [ -z "$prev" ] || [ "$prev" = "$curmeta" ]; then
+      prev="Not available"
+    fi
+    prev="$(printf '%s' "$prev" | sed 's/"/\\"/g')"
+
+    short_player="$(pretty_name "$PLAYER")"
+    picon="$(player_icon "$short_player")"
+
+    # prefix the previous button with the player icon
+    printf '{"text":"%s %s", "tooltip":"%s"}' "$picon " "" "$prev"
+    ;;
+  next)
+    next="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
+    curmeta="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
+    if [ -z "$next" ] || [ "$next" = "$curmeta" ]; then
+      next="Not available"
+    fi
+    next="$(printf '%s' "$next" | sed 's/"/\\"/g')"
+
+    short_player="$(pretty_name "$PLAYER")"
+    picon="$(player_icon "$short_player")"
+
+    # prefix the next button with the player icon
+    printf '{"text":"%s","tooltip":"%s"}' "" "$next"
+    ;;
+  prev-media)
+    playerctl --player="$PLAYER" previous
+    printf '{"text":"","class":"hidden"}'
+    ;;
+  next-media)
+    playerctl --player="$PLAYER" next
+    printf '{"text":"","class":"hidden"}'
+    ;;
+  toggle-media)
+    playerctl --player="$PLAYER" play-pause
+    printf '{"text":"","class":"hidden"}'
+    ;;
+  cycle-media)
+    idx=$((idx + 1))
+    [ "$idx" -gt "$num_players" ] && idx=1
+    echo "$idx" > "$STATE_FILE"
+    printf '{"text":"","class":"hidden"}'
+    ;;
+  *)
+    printf '{"text":"","class":"hidden"}'
+    ;;
+esac
+

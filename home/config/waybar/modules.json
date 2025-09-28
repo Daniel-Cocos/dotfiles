@@ -1,39 +1,63 @@
 {
-	"hyprland/workspaces": {
-		"active-only": false,
-		"all-outputs": true
-	},
-	"custom/exit": {
-		"format": "",
-		"on-click": "wlogout -b 5 -T $(( $(hyprctl -j monitors | jq '.[] | select(.focused==true) | .height') / 4 )) -B $(( $(hyprctl -j monitors | jq '.[] | select(.focused==true) | .height') / 4 ))",
-		"tooltip": false
-	},
-	"clock": {
-		"timezone": "BST",
-		"format": "{:%I:%M %p}",
-		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-		"format-alt": "{:%Y-%m-%d}"
-	},
-	"pulseaudio": {
-		"format": "{icon}   {volume}%",
-		"format-bluetooth": "{volume}% {icon} {format_source}",
-		"format-bluetooth-muted": " {icon} {format_source}",
-		"format-muted": " {format_source}",
-		"format-source": "{volume}% ",
-		"format-source-muted": "",
-		"format-icons": {
-			"headphone": "",
-			"hands-free": "",
-			"headset": "",
-			"phone": "",
-			"portable": "",
-			"car": "",
-			"default": ["", "  ", "  "]
-		},
-		"on-click": "pavucontrol",
-		"on-click-right": "pamixer -t",
-		"on-scroll-up": "pamixer --allow-boost -i 5",
-		"on-scroll-down": "pamixer --allow-boost -d 5",
-		"scroll-step": 5
-	}
+  "hyprland/workspaces": {
+    "active-only": false,
+    "all-outputs": true
+  },
+  "custom/exit": {
+    "format": "",
+    "on-click": "wlogout -b 5 -T $(( $(hyprctl -j monitors | jq '.[] | select(.focused==true) | .height') / 4 )) -B $(( $(hyprctl -j monitors | jq '.[] | select(.focused==true) | .height') / 4 ))",
+    "tooltip": false
+  },
+  "clock": {
+    "timezone": "BST",
+    "format": "{:%I:%M %p}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}"
+  },
+  "pulseaudio": {
+    "format": "{icon}   {volume}%",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "  ",
+        "  "
+      ]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "pamixer -t",
+    "on-scroll-up": "pamixer --allow-boost -i 5",
+    "on-scroll-down": "pamixer --allow-boost -d 5",
+    "scroll-step": 5
+  },
+  "custom/player-prev": {
+    "exec": "~/.scripts/media_player prev",
+    "return-type": "json",
+    "interval": 2,
+    "on-click": "~/.scripts/media_player prev-media"
+  },
+  "custom/player-toggle": {
+    "exec": "~/.scripts/media_player cur",
+    "return-type": "json",
+    "interval": 2,
+    "on-click": "~/.scripts/media_player toggle-media",
+    "on-scroll-up": "~/.scripts/media_player cycle-media",
+    "on-scroll-down": "~/.scripts/media_player cycle-media"
+  },
+  "custom/player-next": {
+    "exec": "~/.scripts/media_player next",
+    "return-type": "json",
+    "interval": 2,
+    "on-click": "~/.scripts/media_player next-media"
+  }
 }

@@ -1,7 +1,7 @@
 {
     // General Settings
     "layer": "top",
-    "margin-top": 7,
+    "margin-top": 0,
     "margin-bottom": 0,
     "margin-left": 7,
     "margin-right": 7,    
@@ -22,6 +22,9 @@
     ],
 
     "modules-right": [
+        "custom/player-prev",
+        "custom/player-toggle",
+        "custom/player-next",
         "pulseaudio",
         "clock",
         "custom/exit",

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Lightweight WiFi Rofi Menu Script
-# Requires: nmcli, rofi
-
-# Function to show notification
 notify() {
     if command -v notify-send &> /dev/null; then
         notify-send "WiFi" "$1"
@@ -113,7 +109,6 @@ case "$SELECTED" in
         fi
         ;;
     "────────────────────────")
-        # Ignore separator
         ;;
     *)
         # Extract SSID from network selection
