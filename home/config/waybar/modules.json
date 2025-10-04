@@ -19,10 +19,6 @@
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%m %d %Y}"
   },
-  "tray": {
-    "icon-size": 16,
-    "spacing": 10
-  },
   "pulseaudio": {
     "format": "{icon}   {volume}%",
     "format-bluetooth": "{volume}% {icon} {format_source}",
@@ -49,36 +45,4 @@
     "on-scroll-down": "pamixer --allow-boost -d 5",
     "scroll-step": 5
   },
-  "custom/media": {
-    "exec": "~/.scripts/media_player info",
-    "return-type": "json",
-    "on-click": "~/.scripts/media_player toggle-media",
-    "on-click-middle": "~/.scripts/media_player toggle-scroll",
-    "on-click-right": "~/.scripts/media_player next-media",
-    "on-scroll-up": "~/.scripts/media_player cycle-media",
-    "on-scroll-down": "~/.scripts/media_player cycle-media"
-  },
-  // Currently not in use
-  "custom/player-prev": {
-    "exec": "~/.scripts/media_player prev",
-    "return-type": "json",
-    "interval": 2,
-    "on-click": "~/.scripts/media_player prev-media"
-  },
-  // Currently not in use
-  "custom/player-toggle": {
-    "exec": "~/.scripts/media_player cur",
-    "return-type": "json",
-    "interval": 2,
-    "on-click": "~/.scripts/media_player toggle-media",
-    "on-scroll-up": "~/.scripts/media_player cycle-media",
-    "on-scroll-down": "~/.scripts/media_player cycle-media"
-  },
-  // Currently not in use
-  "custom/player-next": {
-    "exec": "~/.scripts/media_player next",
-    "return-type": "json",
-    "interval": 2,
-    "on-click": "~/.scripts/media_player next-media"
-  }
 }

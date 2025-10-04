@@ -30,7 +30,7 @@ MENU="${MENU}🔄 Refresh Networks\n"
 if [ -n "$CONNECTED_SSID" ]; then
     MENU="${MENU}🔌 Disconnect from $CONNECTED_SSID\n"
 fi
-MENU="${MENU}─────────────────\n"
+MENU="${MENU}\n\n"
 
 # Get networks and add to menu
 while IFS=':' read -r ssid security signal freq; do

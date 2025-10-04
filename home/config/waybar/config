@@ -14,7 +14,6 @@
 
     "modules-left": [
         "hyprland/workspaces",
-        "custom/media",
     ],
 
     // Modules Center
