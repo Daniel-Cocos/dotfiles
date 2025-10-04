@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-
 MODE="$1"
 STATE_FILE="/tmp/waybar_current_player"
 
@@ -58,110 +57,52 @@ get_meta() {
 
 status="$(playerctl --player="$PLAYER" status 2>/dev/null || echo "")"
 
-pretty_name() {
-  case "$1" in
-    ytmdesktop*|YouTube-Music*)
-      echo "Music"
-      ;;
-    chromium.instance*|chromium)
-      echo "Music"
-      ;;
-    brave*|brave-browser*|brave-browser.desktop)
-      echo "Brave"
-      ;;
-    chrome*|google-chrome*)
-      echo "Chrome"
-      ;;
-    *)
-      echo "$1"
-      ;;
-  esac
-}
-
-player_icon() {
-  case "$1" in
-    Music)
-      echo ""
-      ;;
-    Brave)
-      echo "<span font='Font Awesome 7 Brands' rise='-1500'></span>"
-      ;;
-    Chromium|Chrome)
-      echo "<span font='Font Awesome 6 Free'></span>"
-      ;;
-    *)
-      echo ""
-      ;;
-  esac
-}
-
 case "$MODE" in
   cur)
     title="$(get_meta xesam:title)"
     artist="$(get_meta xesam:artist)"
     artist="$(printf '%s' "$artist" | sed -E 's/^\((.*)\)$/\1/; s/^ +//; s/ +$//')"
-
-    play_icon=""
-    echo "$status" | grep -q "Playing" && play_icon=""
-
-    title="${title:-Unknown}"
-    if [ -n "$artist" ]; then
-      tooltip="$(printf '%s - %s' "$title" "$artist")"
-    else
-      tooltip="$title"
-    fi
-
+    [ -n "$title" ] || title="Unknown"
+    icon=""
+    echo "$status" | grep -q "Playing" && icon=""
+    tooltip="$title"
+    [ -n "$artist" ] && tooltip="$title - $artist"
     tooltip="$(printf '%s' "$tooltip" | sed 's/"/\\"/g')"
-
-    short_player="$(pretty_name "$PLAYER")"
+    short_player="$(printf '%s' "$PLAYER" | sed 's/\..*$//')"
     tooltip="[$short_player] $tooltip"
-
-    picon="$(player_icon "$short_player")"
-
-    # show player icon followed by play/pause icon
-    printf '{"text":"%s", "tooltip":"%s"}' "$play_icon" "$tooltip"
+    printf '{"text":"%s","tooltip":"%s"}' "$icon" "$tooltip"
     ;;
   prev)
     prev="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
-    curmeta="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
-    if [ -z "$prev" ] || [ "$prev" = "$curmeta" ]; then
+    cur="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
+    if [ -z "$prev" ] || [ "$prev" = "$cur" ]; then
       prev="Not available"
     fi
     prev="$(printf '%s' "$prev" | sed 's/"/\\"/g')"
-
-    short_player="$(pretty_name "$PLAYER")"
-    picon="$(player_icon "$short_player")"
-
-    # prefix the previous button with the player icon
-    printf '{"text":"%s %s", "tooltip":"%s"}' "$picon " "" "$prev"
+    printf '{"text":"","tooltip":"%s"}' "$prev"
     ;;
   next)
     next="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
-    curmeta="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
-    if [ -z "$next" ] || [ "$next" = "$curmeta" ]; then
+    cur="$(playerctl --player="$PLAYER" metadata --format '{{xesam:title}} - {{xesam:artist}}' 2>/dev/null || echo "")"
+    if [ -z "$next" ] || [ "$next" = "$cur" ]; then
       next="Not available"
     fi
     next="$(printf '%s' "$next" | sed 's/"/\\"/g')"
-
-    short_player="$(pretty_name "$PLAYER")"
-    picon="$(player_icon "$short_player")"
-
-    # prefix the next button with the player icon
     printf '{"text":"%s","tooltip":"%s"}' "" "$next"
     ;;
-  prev-media)
+  do-prev)
     playerctl --player="$PLAYER" previous
     printf '{"text":"","class":"hidden"}'
     ;;
-  next-media)
+  do-next)
     playerctl --player="$PLAYER" next
     printf '{"text":"","class":"hidden"}'
     ;;
-  toggle-media)
+  do-toggle)
     playerctl --player="$PLAYER" play-pause
     printf '{"text":"","class":"hidden"}'
     ;;
-  cycle-media)
+  cycle)
     idx=$((idx + 1))
     [ "$idx" -gt "$num_players" ] && idx=1
     echo "$idx" > "$STATE_FILE"
@@ -171,4 +112,3 @@ case "$MODE" in
     printf '{"text":"","class":"hidden"}'
     ;;
 esac
-
