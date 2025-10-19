@@ -17,10 +17,10 @@
     "timezone": "BST",
     "format": "{:%I:%M %p}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%m %d %Y}"
+    "format-alt": "{:%m-%d-%Y}"
   },
   "pulseaudio": {
-    "format": "{icon}   {volume}%",
+    "format": "{icon} {volume}%",
     "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
     "format-muted": "  {volume}%",
@@ -36,7 +36,7 @@
       "default": [
         "",
         " ",
-        "  "
+        " "
       ]
     },
     "on-click": "pavucontrol",

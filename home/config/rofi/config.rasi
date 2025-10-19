@@ -5,7 +5,7 @@ entry {
 }
 
 configuration {
-    font: "JetBrainsMono Nerd Font Mono Bold 12";
+    font: "JetBrainsMono NF ExtraBold 12";
     lines: 10;
     fixed-num-lines: true;
     padding: 10px;
@@ -33,7 +33,7 @@ window {
     border-radius: 16px;
     border: 2px;
     border-color: rgba(255, 255, 255, 0.8);
-    background-color: rgba(13,12,14,0.6);
+    background-color: rgba(0,0,0,0.6);
     width: 30%;
 }
 
@@ -50,7 +50,7 @@ element {
 
 element-text {
     text-color: #c5c9d2;
-    highlight: bold #1b7f7a;
+    highlight: bold #51AFEF;
 }
 
 element-text selected {
